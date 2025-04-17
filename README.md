@@ -1,4 +1,4 @@
-# Acadly **Sistema de Gerenciamento de Eventos Acadêmicos**  
+# **Acadly - Sistema de Gerenciamento de Eventos Acadêmicos**  
 
 ## **Descrição do Projeto**  
 O **Sistema de Gerenciamento de Eventos Acadêmicos** é uma plataforma web desenvolvida como parte do Projeto Interdisciplinar, com o objetivo de facilitar a organização, inscrição e certificação de eventos acadêmicos, como palestras, workshops, seminários e congressos.  
@@ -8,17 +8,10 @@ A aplicação oferece um **CRUD completo** (Create, Read, Update, Delete) para:
 - **Usuários** (organizadores, palestrantes e participantes);  
 - **Emissão de certificados** (geração automática e personalizada para os participantes).  
 
-Além disso, o sistema permite:  
-- **Inscrição em eventos** (com confirmação por e-mail);  
-- **Controle de presença** (validação de participação para emissão de certificados);  
-- **Dashboard administrativo** (relatórios e gestão de eventos).  
-
 ## **Tecnologias Utilizadas**  
-- **Front-end:** HTML, CSS, JavaScript (React.js ou Vue.js);  
-- **Back-end:** Node.js (Express) ou PHP (Laravel);  
-- **Banco de dados:** MySQL ou PostgreSQL;  
-- **Geração de certificados:** Biblioteca PDF (ex: PDFKit, jsPDF);  
-- **Autenticação:** JWT (JSON Web Tokens) ou OAuth.  
+- **Front-end:** HTML, CSS, JavaScript;  
+- **Back-end:** Node.js (Express);  
+- **Banco de dados:** MySQL;  
 
 ## **Funcionalidades Principais**  
 ✅ **Cadastro e Gerenciamento de Eventos**  
