@@ -1,4 +1,4 @@
-# Acadly# **Sistema de Gerenciamento de Eventos Acadêmicos**  
+# Acadly **Sistema de Gerenciamento de Eventos Acadêmicos**  
 
 ## **Descrição do Projeto**  
 O **Sistema de Gerenciamento de Eventos Acadêmicos** é uma plataforma web desenvolvida como parte do Projeto Interdisciplinar, com o objetivo de facilitar a organização, inscrição e certificação de eventos acadêmicos, como palestras, workshops, seminários e congressos.  
