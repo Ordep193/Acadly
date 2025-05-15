@@ -1,12 +1,12 @@
 const db = require("../config/database");
 
-async function addParticipante(nome, senha, email, idade, telefone, cpf, instituicao) {
+async function addUsuario(nome, senha, email, idade, telefone, cpf, instituicao) {
     const client = await db.connect();
 
     try {
         await client.query("BEGIN");
 
-        const queryText = "INSERT INTO participante(nome, senha, email, idade, telefone, cpf, instituicao,compareceu) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)";
+        const queryText = "INSERT INTO usuario(nome, senha, email, idade, telefone, cpf, instituicao,compareceu) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)";
 
         const values = [nome, senha, email, idade, telefone, cpf, instituicao,false];
 
@@ -27,15 +27,15 @@ async function addParticipante(nome, senha, email, idade, telefone, cpf, institu
     return true;
 }
 
-async function updateParticipante(id,nome, senha, email, idade, telefone, cpf, instituicao) {
+async function updateUsuario(id,nome, senha, email, idade, telefone, cpf, instituicao) {
     const client = await db.connect();
 
     try {
         await client.query("BEGIN");
 
-        const queryText = "UPDATE participante SET(nome = $1, senha = $2, email = $3, idade = $4, telefone = $5, cpf = $6, instituicao = $7) where id = $8";
+        const queryText = "UPDATE usuario SET(nome = $1, senha = $2, email = $3, idade = $4, telefone = $5, cpf = $6, instituicao = $7) where id = $8";
 
-        const values = [nome, senha, email, idade, telefone, cpf, instituicao,ID];
+        const values = [nome, senha, email, idade, telefone, cpf, instituicao,id];
 
         await client.query(queryText,values);
 
@@ -54,13 +54,13 @@ async function updateParticipante(id,nome, senha, email, idade, telefone, cpf, i
     return true;
 }
 
-async function deleteParticipante(id){
+async function deleteUsuario(id){
     const client = await db.connect();
 
     try {
         await client.query("BEGIN");
         
-        const queryText = "DELETE from participante where id = $1";
+        const queryText = "DELETE from usuario where id = $1";
 
         const values = [id];
 
@@ -78,13 +78,13 @@ async function deleteParticipante(id){
     return true;
 }
 
-async function getParticipante(id) {
+async function getUsuario(id) {
     const client = await db.connect();
     
     try {
         await client.query("BEGIN");
 
-        const queryText = "SELECT * from participante where id = $1";
+        const queryText = "SELECT * from usuario where id = $1";
         const values = [id];
 
         const{rows} = await client.query(queryText,values);
@@ -92,7 +92,7 @@ async function getParticipante(id) {
         client.query("COMMIT");
 
         if(rows.length==0){
-            throw new Error("Participante não encontrado")
+            throw new Error("usuario não encontrado")
         }
 
         result = rows[0];
@@ -106,13 +106,13 @@ async function getParticipante(id) {
     return result;
 }
 
-async function getParticipanteAll() {
+async function getUsuarioAll() {
     const client = await db.connect();
     let result;
     try {
         client.query("BEGIN");
 
-        const queryText = "SELECT * from participante order by id";
+        const queryText = "SELECT * from usuario order by id";
 
         const{rows} = await client.query(queryText);
 
@@ -133,4 +133,4 @@ async function getParticipanteAll() {
     return result;
 }
 
-module.exports = {addParticipante,updateParticipante,removeEventListener,getParticipante,getParticipanteAll};
+module.exports = {addUsuario,updateUsuario,getUsuario,getUsuarioAll,deleteUsuario};

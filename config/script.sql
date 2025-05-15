@@ -1,6 +1,6 @@
 use Acadly;
 
-create table evento(id int,
+create table evento(id int primary key,
             nome varchar(250), 
             descricao varchar(250), 
             dataInicio date, 
@@ -9,18 +9,33 @@ create table evento(id int,
             area varchar(250),
             modalidade varchar(250), 
             regiao varchar(100), 
-            instituicao varchar(250)) ;
+            instituicao varchar(250),
+            capa image
+            );
 
-create table participante(id int, 
+create table usuario(id int primary key, 
             nome varchar(250), 
             idade int,
             telefone varchar(250),
             cpf varchar(250),
             email varchar(250),
             senha varchar(250),
-            compareceu boolean,
-            institucao varchar(250));
+            institucao varchar(250),
+            nivel int
+            );
 
-create table participanteEvento()
+create table evento_usuario(
+            idEvento int,
+            idUsuario int,
+            compareceu boolean
+);
 
+create table feedback(
+            id int primary key,
+            idUsuario int,
+            idEvento int,
+            feedback varchar(250),
+            nota int
+);
 
+create table talvezCertifiado();
