@@ -37,5 +37,3 @@ create table feedback(
             feedback varchar(250),
             nota int
 );
-
-create table talvezCertifiado();
