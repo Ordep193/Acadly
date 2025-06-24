@@ -37,3 +37,11 @@ create table feedback(
             feedback varchar(250),
             nota int
 );
+
+create table certificado(
+            id int primary key,
+            idUsuario int REFERENCES usuaruio,
+            idEvento int REFERENCES evento,
+            texto varchar(250),
+            data_cricao date
+);
