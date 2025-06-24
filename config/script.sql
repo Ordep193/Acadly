@@ -14,6 +14,7 @@ create table evento(id int primary key,
             );
 
 create table usuario(id int primary key, 
+            id_certificado int REFERENCES certificado,
             nome varchar(250), 
             idade int,
             telefone varchar(250),
