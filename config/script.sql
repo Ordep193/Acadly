@@ -1,6 +1,7 @@
 use Acadly;
 
-create table evento(id int primary key,
+create table evento(
+            id int primary key,
             nome varchar(250), 
             descricao varchar(250), 
             dataInicio date, 
@@ -13,7 +14,8 @@ create table evento(id int primary key,
             capa image
             );
 
-create table usuario(id int primary key, 
+create table usuario(
+            id int primary key, 
             id_certificado int REFERENCES certificado,
             nome varchar(250), 
             idade int,
