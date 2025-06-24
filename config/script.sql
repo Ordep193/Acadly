@@ -25,15 +25,15 @@ create table usuario(id int primary key,
             );
 
 create table evento_usuario(
-            idEvento int,
-            idUsuario int,
+            idEvento int REFERENCES evento,
+            idUsuario int REFERENCES usuaruio,
             compareceu boolean
 );
 
 create table feedback(
             id int primary key,
-            idUsuario int,
-            idEvento int,
+            idUsuario int REFERENCES usuaruio,
+            idEvento int REFERENCES evento,
             feedback varchar(250),
             nota int
 );
