@@ -1,5 +1,9 @@
 const db = require("../config/database")
 
+async function addCertificado(params) {
+    
+}
+
 async function deleteCertificado(id){
     const client = await db.connect();
 

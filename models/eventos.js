@@ -1,5 +1,83 @@
 const db = require("../config/database");
 
+async function addEvento(nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao) {
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        const queryText = "INSERT INTO evento(nome, descricao, dataInicio, dataFim, participantes, modalidade, regiao, instituicao) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+
+        const values = [nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao];
+
+        await client.query(queryText,values);
+
+        await client.query("COMMIT");
+        
+    } catch (error) {
+
+        await client.query("ROLLBACK")
+        console.log(error);
+        return false;
+
+    }finally{
+        client.release()
+    }
+
+    return true;
+}
+
+async function updateEvento(id, nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao) {
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        const queryText = "UPDATE evento SET(nome = $2, descricao = $3, dataInicio = $4, dataFim = $5, participantes = $6, modalidade = $7, regiao = $8, instituicao = $9)where id = $1";
+
+        const values = [id, nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao];
+
+        await client.query(queryText,values);
+
+        await client.query("COMMIT");
+        
+    } catch (error) {
+
+        await client.query("ROLLBACK")
+        console.log(error);
+        return false;
+
+    }finally{
+        client.release()
+    }
+
+    return true;
+}
+
+async function deleteEvento(id){
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+        
+        const queryText = "DELETE from evento where id = $1";
+
+        const values = [id];
+
+        await client.query(queryText,values);
+
+        await client.query("COMMIT");
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.log(error);
+        return false
+    } finally{
+        client.release();
+    }
+
+    return true;
+}
+
 async function getEvento(id) {
     const client = await db.connect();
     
@@ -83,4 +161,4 @@ async function getEventoAll() {
     return result;
 }
 
-module.exports = {getEvento,getEventoCard,getEventoAll};
+module.exports = {addEvento,updateEvento,deleteEvento,getEvento,getEventoCard,getEventoAll};

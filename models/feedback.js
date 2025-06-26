@@ -1,5 +1,26 @@
 const db = require("../config/database")
 
+async function fazerFeedback(id,idEvento,idUsuario,descricao,nota) {
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+        const queryText = "INSERT INTO feedback(id,idEvento,idUsuario,descricao,nota) VALUES ($1, $2, $3, $4, $5)"
+
+        const values = [id,idEvento,idUsuario,descricao,nota];
+        
+        await client.query(queryText,values);
+        await client.query("COMMIT");
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.log(error);
+        return false;
+    }finally{
+        client.release();
+    }
+    return true;
+}
+
 async function updateFeedback(id,descricao,nota) {
     const client = await db.connect();
 
@@ -107,4 +128,4 @@ async function getFeedbackAll(idUsuario) {
     return result;
 }
 
-module.exports = {updateFeedback,deleteFeedback,getFeedback,getFeedbackAll}
+module.exports = {fazerFeedback,updateFeedback,deleteFeedback,getFeedback,getFeedbackAll}
