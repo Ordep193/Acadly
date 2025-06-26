@@ -1,7 +1,7 @@
 const db = require("../config/database")
 
 async function addCertificado(params) {
-    
+    // tem que fazer ainda
 }
 
 async function deleteCertificado(id){

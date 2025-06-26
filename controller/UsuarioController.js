@@ -22,7 +22,7 @@ async function criarUsuario(nome, senha, email, idade, telefone, cpf, instituica
         return resultado;
     } catch (error) {
         console.error("Erro ao criar usuário:", error);
-        throw error; // Para propagar o erro para quem chamou a funcao
+        throw error; // Para propagar o erro para quem chamou a função
     }
 }
 
@@ -40,7 +40,7 @@ async function deleteUsuario(id) {
     }
 }
 
-async function updadeUsuario(id,nome, senha, email, idade, telefone, cpf, instituicao) {
+async function updateUsuario(id,nome, senha, email, idade, telefone, cpf, instituicao) {
     try {
         // Validação simples
         if (!id && !nome && !senha && !email && !idade && !telefone && !cpf && !instituicao) {
@@ -56,7 +56,7 @@ async function updadeUsuario(id,nome, senha, email, idade, telefone, cpf, instit
         return resultado;
     } catch (error) {
         console.error("Erro ao atualizar usuário:", error);
-        throw error; // Para propagar o erro para quem chamou a funcao
+        throw error; // Para propagar o erro para quem chamou a função
     }
 }
 
@@ -72,7 +72,7 @@ async function getUsuario(id) {
         return resultado //dados do usuário;
     } catch (error) {
         console.error("Erro ao buscar especialidade:", error);
-        throw error; // Para propagar o erro para quem chamou a funcao
+        throw error; // Para propagar o erro para quem chamou a função
     }
 }
 
@@ -117,17 +117,51 @@ async function criarEvento(nome, descricao, dataInicio,dataFim, participantes, m
         if(!nome && !descricao && !dataInicio && !dataFim && !participantes && !modalidade && !regiao && !instituicao)
             throw new Error("Algum dado não foi preenchido corretamente");
 
-        const resultado = await Usuario.addEvento(nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao); 
+        const resultado = await Evento.addEvento(nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao); 
 
         if (!resultado) {
-            throw new Error("Falha ao adicionar usuário");
+            throw new Error("Falha ao adicionar o evento");
         }
 
         return resultado;    
     } catch (error) {
-        
+        console.error("Erro ao criar usuário:", error);
+        throw error; // Para propagar o erro para quem chamou a função
     }
-    
 }
 
-module.exports = {criarUsuario,getUsuario,getUsuarioAll,deleteUsuario,updadeUsuario,fazerFeedback};
+async function deleteEvento(id) {
+    try {
+        if(!id)
+            throw new Error("Id é obtigatório");
+
+        const resultado = await Evento.deleteEvento(id);
+        
+        return resultado    
+    } catch (error) {
+        console.error("Error ao apagar o evento",error);
+        throw error;
+    }
+}
+
+async function updateEvento(id, nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao) {
+    try {
+        // Validação simples
+        if (!id && !nome && !descricao && !dataInicio && !dataFim && !participantes && !modalidade && !regiao && !instituicao) {
+            throw new Error("Algum dado não foi preenchido");
+        }
+
+        const resultado = await Evento.updateEvento(id, nome, descricao, dataInicio,dataFim, participantes, modalidade, regiao,instituicao); 
+
+        if (!resultado) {
+            throw new Error("Falha ao atualizar o evento");
+        }
+
+        return resultado;
+    } catch (error) {
+        console.error("Erro ao atualizar o evento:", error);
+        throw error; // Para propagar o erro para quem chamou a função
+    }
+}
+
+module.exports = {criarUsuario,getUsuario,getUsuarioAll,deleteUsuario,updateUsuario,fazerFeedback,criarEvento,updateEvento,deleteEvento};
