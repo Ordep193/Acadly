@@ -1,7 +1,24 @@
 const db = require("../config/database")
 
-async function addCertificado(params) {
-    // tem que fazer ainda
+async function addCertificado(idUsuario,idEvento,descricao,dataCriacao) {
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+        const queryText = "INSERT INTO certifricado(idEvento,idUsuario,descricao,dataCriacao) VALUES ($1, $2, $3, $4)"
+
+        const values = [idEvento,idUsuario,descricao,dataCriacao];
+        
+        await client.query(queryText,values);
+        await client.query("COMMIT");
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.log(error);
+        return false;
+    }finally{
+        client.release();
+    }
+    return true;   
 }
 
 async function deleteCertificado(id){
@@ -84,4 +101,4 @@ async function getCertificadoAll(idUsuario) {
     return result;
 }
 
-module.exports = {deleteCertificado,getCertificado,getCertificadoAll}
+module.exports = {addCertificado,deleteCertificado,getCertificado,getCertificadoAll}

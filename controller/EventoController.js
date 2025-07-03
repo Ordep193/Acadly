@@ -2,7 +2,6 @@ const e = require('express')
 const Evento = require("../models/Eventos")
 const Certificado = require("../models/Certificado")
 
-//mudar para o controller do evento
 async function getEvento(id) {
     try {
         // Validação simples
@@ -33,4 +32,39 @@ async function getEventoAll() {
     }
 }
 
-module.exports = {getEvento,getEventoAll}
+async function notificarUsuario(idUsuario) {
+    //tem que implementar
+}
+
+async function registrarSubimissao(idUsuario,idEvento) {
+    // esse registrar subimissão é de uma participação no evento?
+
+}
+
+async function criarCertificado(idUsuario,idEvento) {
+    try {
+        evento = await Evento.getEvento(idEvento)
+        destricao = "Mensagem generecia de certificado do evento: "+evento.nome;
+    } catch (error) {
+        console.error("Erro ao buscar os dados do evento:", error);
+        throw error;
+    }
+    
+    try {
+        const agora = new Date();
+
+        const dia = agora.getDate().toString().padStart(2, '0');
+        const mes = (agora.getMonth() + 1).toString().padStart(2, '0'); // mês começa do zero!
+        const ano = agora.getFullYear();
+
+        const dataCriacao = `${dia}/${mes}/${ano}`;
+
+        await Certificado.addCertificado(idUsuario,idEvento,destricao,dataCriacao)
+        
+    } catch (error) {
+        console.error("Erro ao buscar os dados do evento:", error);
+        throw error;
+    }
+}
+
+module.exports = {getEvento,getEventoAll,criarCertificado,emitirCertificado}
