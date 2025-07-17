@@ -1,11 +1,11 @@
 // db.js
-const { Pool } = require('pg');
+const mysql = require('mysql2/promise');
 
-const db = new Pool({
+const db = mysql.createPool({
   host: "localhost",
-  port: 5432,
-  user: "admin",
-  password: "123456",
+  port: 3306,
+  user: "acadly_adm",
+  password: "12345678",
   database: "acadly",
 });
 

@@ -1,104 +1,78 @@
-const db = require("../config/database")
+const db = require("../config/database");
 
-async function addCertificado(idUsuario,idEvento,descricao,dataCriacao) {
-    const client = await db.connect();
+async function addCertificado(idUsuario, idEvento, descricao, dataCriacao) {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
 
-    try {
-        await client.query("BEGIN");
-        const queryText = "INSERT INTO certifricado(idEvento,idUsuario,descricao,dataCriacao) VALUES ($1, $2, $3, $4)"
+    const query = `
+      INSERT INTO certificado (idEvento, idUsuario, descricao, dataCriacao)
+      VALUES (?, ?, ?, ?)
+    `;
+    const values = [idEvento, idUsuario, descricao, dataCriacao];
 
-        const values = [idEvento,idUsuario,descricao,dataCriacao];
-        
-        await client.query(queryText,values);
-        await client.query("COMMIT");
-    } catch (error) {
-        await client.query("ROLLBACK");
-        console.log(error);
-        return false;
-    }finally{
-        client.release();
-    }
-    return true;   
-}
-
-async function deleteCertificado(id){
-    const client = await db.connect();
-
-    try {
-        await client.query("BEGIN");
-        
-        const queryText = "DELETE from certificado where id = $1";
-
-        const values = [id];
-
-        await client.query(queryText,values);
-
-        await client.query("COMMIT");
-    } catch (error) {
-        await client.query("ROLLBACK");
-        console.log(error);
-        return false
-    } finally{
-        client.release();
-    }
-
+    await conn.query(query, values);
+    await conn.commit();
     return true;
+  } catch (error) {
+    await conn.rollback();
+    console.error(error);
+    return false;
+  } finally {
+    conn.release();
+  }
 }
 
-async function getCertificado(id) {
-    const client = await db.connect();
-    
-    try {
-        await client.query("BEGIN");
+async function deleteCertificado(id) {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
 
-        const queryText = "SELECT * from certificado where id = $1";
-        const values = [id];
+    const query = "DELETE FROM certificado WHERE id = ?";
+    await conn.query(query, [id]);
 
-        const{rows} = await client.query(queryText,values);
+    await conn.commit();
+    return true;
+  } catch (error) {
+    await conn.rollback();
+    console.error(error);
+    return false;
+  } finally {
+    conn.release();
+  }
+}
 
-        client.query("COMMIT");
-
-        if(rows.length==0){
-            throw new Error("Certificado não encontrado")
-        }
-
-        result = rows[0];
-    } catch (error) {
-        console.log(error);
-        return false;
-    }finally{
-        client.release();
+async function getCertificado(idUsuario, idEvento) {
+  const query = "SELECT * FROM certificado WHERE idUsuario = ? AND idEvento = ?";
+  try {
+    const [rows] = await db.query(query, [idUsuario, idEvento]);
+    if (rows.length === 0) {
+      throw new Error("Certificado não encontrado");
     }
-
-    return result;
+    return rows[0];
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
 async function getCertificadoAll(idUsuario) {
-    const client = await db.connect();
-    let result;
-    try {
-        client.query("BEGIN");
-
-        const queryText = "SELECT * from certificado order by id where idUsuario = $1";
-        const values = [idUsuario]
-
-        const{rows} = await client.query(queryText,idUsuario);
-
-        client.query("COMMIT");
-
-        if(rows.length==0){
-            throw new Error("Certificado não encontrado")
-        }
-
-        result = rows;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }finally{
-        client.release();
+  const query = "SELECT * FROM certificado WHERE idUsuario = ? ORDER BY id";
+  try {
+    const [rows] = await db.query(query, [idUsuario]);
+    if (rows.length === 0) {
+      throw new Error("Nenhum certificado encontrado");
     }
-
-    return result;
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
-module.exports = {addCertificado,deleteCertificado,getCertificado,getCertificadoAll}
+module.exports = {
+  addCertificado,
+  deleteCertificado,
+  getCertificado,
+  getCertificadoAll,
+};

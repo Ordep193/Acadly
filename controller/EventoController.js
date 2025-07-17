@@ -67,4 +67,18 @@ async function criarCertificado(idUsuario,idEvento) {
     }
 }
 
+async function emitirCertificado(params,idEvento,idUsuario) {
+    try {
+        const result = await Certificado.getCertificado(idUsuario,idEvento);
+
+        if(!result){
+            throw new Error("Falha ao pegar os eventos");
+        }
+        return result;
+    } catch (error) {
+        console.error("Erro ao buscar os eventos:", error);
+        throw error; 
+    }
+}
+
 module.exports = {getEvento,getEventoAll,criarCertificado,emitirCertificado}

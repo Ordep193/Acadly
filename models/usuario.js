@@ -1,136 +1,94 @@
 const db = require("../config/database");
 
-async function addUsuario(nome, senha, email, idade, telefone, cpf, instituicao,cargo) {
-    const client = await db.connect();
+async function addUsuario(nome, senha, email, idade, telefone, cpf, instituicao, cargo) {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
 
-    try {
-        await client.query("BEGIN");
+    const query = `
+      INSERT INTO usuario (nome, senha, email, idade, telefone, cpf, instituicao, cargo)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    await conn.query(query, [nome, senha, email, idade, telefone, cpf, instituicao, cargo]);
 
-        const queryText = "INSERT INTO usuario(nome, senha, email, idade, telefone, cpf, instituicao, cargo) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)";
-
-        const values = [nome, senha, email, idade, telefone, cpf, instituicao,cargo];
-
-        await client.query(queryText,values);
-
-        await client.query("COMMIT");
-        
-    } catch (error) {
-
-        await client.query("ROLLBACK")
-        console.log(error);
-        return false;
-
-    }finally{
-        client.release()
-    }
-
+    await conn.commit();
     return true;
+  } catch (error) {
+    await conn.rollback();
+    console.error(error);
+    return false;
+  } finally {
+    conn.release();
+  }
 }
 
-async function updateUsuario(id,nome, senha, email, idade, telefone, cpf, instituicao) {
-    const client = await db.connect();
+async function updateUsuario(id, nome, senha, email, idade, telefone, cpf, instituicao) {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
 
-    try {
-        await client.query("BEGIN");
+    const query = `
+      UPDATE usuario SET
+        nome = ?, senha = ?, email = ?, idade = ?, telefone = ?, cpf = ?, instituicao = ?
+      WHERE id = ?
+    `;
+    await conn.query(query, [nome, senha, email, idade, telefone, cpf, instituicao, id]);
 
-        const queryText = "UPDATE usuario SET(nome = $1, senha = $2, email = $3, idade = $4, telefone = $5, cpf = $6, instituicao = $7) where id = $8";
-
-        const values = [nome, senha, email, idade, telefone, cpf, instituicao,id];
-
-        await client.query(queryText,values);
-
-        await client.query("COMMIT");
-        
-    } catch (error) {
-
-        await client.query("ROLLBACK")
-        console.log(error);
-        return false;
-
-    }finally{
-        client.release()
-    }
-
+    await conn.commit();
     return true;
+  } catch (error) {
+    await conn.rollback();
+    console.error(error);
+    return false;
+  } finally {
+    conn.release();
+  }
 }
 
-async function deleteUsuario(id){
-    const client = await db.connect();
+async function deleteUsuario(id) {
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
 
-    try {
-        await client.query("BEGIN");
-        
-        const queryText = "DELETE from usuario where id = $1";
+    await conn.query("DELETE FROM usuario WHERE id = ?", [id]);
 
-        const values = [id];
-
-        await client.query(queryText,values);
-
-        await client.query("COMMIT");
-    } catch (error) {
-        await client.query("ROLLBACK");
-        console.log(error);
-        return false
-    } finally{
-        client.release();
-    }
-
+    await conn.commit();
     return true;
+  } catch (error) {
+    await conn.rollback();
+    console.error(error);
+    return false;
+  } finally {
+    conn.release();
+  }
 }
 
 async function getUsuario(id) {
-    const client = await db.connect();
-    
-    try {
-        await client.query("BEGIN");
-
-        const queryText = "SELECT * from usuario where id = $1";
-        const values = [id];
-
-        const{rows} = await client.query(queryText,values);
-
-        client.query("COMMIT");
-
-        if(rows.length==0){
-            throw new Error("usuario não encontrado")
-        }
-
-        result = rows[0];
-    } catch (error) {
-        console.log(error);
-        return false;
-    }finally{
-        client.release();
-    }
-
-    return result;
+  try {
+    const [rows] = await db.query("SELECT * FROM usuario WHERE id = ?", [id]);
+    if (rows.length === 0) throw new Error("Usuário não encontrado");
+    return rows[0];
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
 async function getUsuarioAll() {
-    const client = await db.connect();
-    let result;
-    try {
-        client.query("BEGIN");
-
-        const queryText = "SELECT * from usuario order by id";
-
-        const{rows} = await client.query(queryText);
-
-        client.query("COMMIT");
-
-        if(rows.length==0){
-            throw new Error("Evento não encontrado")
-        }
-
-        result = rows;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }finally{
-        client.release();
-    }
-
-    return result;
+  try {
+    const [rows] = await db.query("SELECT * FROM usuario ORDER BY id");
+    if (rows.length === 0) throw new Error("Nenhum usuário encontrado");
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
-module.exports = {addUsuario,updateUsuario,getUsuario,getUsuarioAll,deleteUsuario,fazerFeedback};
+module.exports = {
+  addUsuario,
+  updateUsuario,
+  getUsuario,
+  getUsuarioAll,
+  deleteUsuario,
+};
