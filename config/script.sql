@@ -1,49 +1,57 @@
-use Acadly;
+CREATE DATABASE IF NOT EXISTS Acadly;
+USE Acadly;
 
-create table evento(
-    id int primary key AUTO_INCREMENT,
-    nome varchar(250), 
-    descricao varchar(250), 
-    dataInicio date, 
-    dataFim date, 
-    participantes int, 
-    area varchar(250),
-    modalidade varchar(250), 
-    regiao varchar(100), 
-    instituicao varchar(250),
-    capa image
+CREATE TABLE evento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(250), 
+    descricao VARCHAR(250), 
+    dataInicio DATE, 
+    dataFim DATE, 
+    participantes INT, 
+    area VARCHAR(250),
+    modalidade VARCHAR(250), 
+    regiao VARCHAR(100), 
+    instituicao VARCHAR(250),
+    capa LONGBLOB
 );
 
-create table usuario(
-    id int primary key AUTO_INCREMENT, 
-    nome varchar(250), 
-    idade int,
-    telefone varchar(250),
-    cpf varchar(250),
-    email varchar(250),
-    senha varchar(250),
-    institucao varchar(250),
-    cargo int
+CREATE TABLE usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT, 
+    nome VARCHAR(250), 
+    idade INT,
+    telefone VARCHAR(250),
+    cpf VARCHAR(250),
+    email VARCHAR(250),
+    senha VARCHAR(250),
+    instituicao VARCHAR(250),
+    cargo INT
 );
 
-create table evento_usuario(
-    idEvento int REFERENCES evento,
-    idUsuario int REFERENCES usuaruio,
-    comparecer boolean
+CREATE TABLE evento_usuario (
+    idEvento INT,
+    idUsuario INT,
+    comparecer BOOLEAN,
+    PRIMARY KEY (idEvento, idUsuario),
+    FOREIGN KEY (idEvento) REFERENCES evento(id),
+    FOREIGN KEY (idUsuario) REFERENCES usuario(id)
 );
 
-create table feedback(
-    id int primary key AUTO_INCREMENT,
-    idEvento int REFERENCES evento,
-    idUsuario int REFERENCES usuaruio,
-    descricao varchar(250),
-    nota int
+CREATE TABLE feedback (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idEvento INT,
+    idUsuario INT,
+    descricao VARCHAR(250),
+    nota INT,
+    FOREIGN KEY (idEvento) REFERENCES evento(id),
+    FOREIGN KEY (idUsuario) REFERENCES usuario(id)
 );
 
-create table certifiado( 
-    id int primary key AUTO_INCREMENT,
-    idUsuario int REFERENCES usuario,
-    idEvento int REFERENCES evento,
-    descricao varchar(400),
-    dataCriacao date
+CREATE TABLE certificado ( 
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idUsuario INT,
+    idEvento INT,
+    descricao VARCHAR(400),
+    dataCriacao DATE,
+    FOREIGN KEY (idUsuario) REFERENCES usuario(id),
+    FOREIGN KEY (idEvento) REFERENCES evento(id)
 );
