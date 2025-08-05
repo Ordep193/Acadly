@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACADLY - Editar Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Overlock+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="page-perfil">
+
+    <aside class="sidebar">
+        </aside>
+
+    <main class="main-content">
+        <section class="profile-page">
+            
+            <header class="profile-header">
+                <h2>Foto de Perfil</h2>
+                <div class="photo-and-link-wrapper">
+                    <img class="profile-avatar" src="/img/Perfil.png" alt="Foto de Perfil de Rebeca Mattos">
+                    <a href="#" class="change-photo-link">Alterar foto</a>
+                </div>
+            </header>
+
+            <hr class="divider">
+
+            <form class="profile-details">
+                <dl>
+                    <dt>Nome do Usuário</dt>
+                    <dd><input type="text" value="Rebeca Mattos"></dd>
+
+                    <dt>Endereço de Email</dt>
+                    <dd><input type="email" value="rebecamattos@gmail.com"></dd>
+
+                    <dt>Instituição de Ensino</dt>
+                    <dd><input type="text" value="Instituto Federal do Sudeste de Minas"></dd>
+
+                    <dt>Sigla da Institução de Ensino</dt>
+                    <dd><input type="text" value="IFSEMG"></dd>
+
+                    <dt>Senha</dt>
+                    <dd>
+                        <div class="password-input-wrapper">
+                            <input type="password" value="Rebeca123">
+                            <i class="fa-regular fa-eye-slash"></i>
+                        </div>
+                    </dd>
+                </dl>
+            
+                <footer class="profile-actions">
+                    <button type="button" class="btn-voltar"><a href="/html/perfil.html">Voltar</button></a>
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </footer>
+            </form>
+
+        </section>
+    </main>
+
+</body>
+</html>
