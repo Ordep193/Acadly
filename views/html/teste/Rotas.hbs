@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Página de Teste de Rotas</title>
+</head>
+<body>
+  <h1>Teste de Funcionalidades</h1>
+
+  <h2>Criar Evento</h2>
+  <form action="/eventos/criar" method="POST">
+    <input name="nome" placeholder="Nome do evento" required>
+    <input name="descricao" placeholder="Descrição" required>
+    <input name="dataInicio" type="date" placeholder="Data Início" required>
+    <input name="dataFim" type="date" placeholder="Data Fim" required>
+    <input name="participantes" placeholder="Participantes" required>
+    <input name="modalidade" placeholder="Modalidade" required>
+    <input name="regiao" placeholder="Região" required>
+    <input name="instituicao" placeholder="Instituição" required>
+    <button type="submit">Criar</button>
+  </form>
+
+  <h2>Criar Usuário</h2>
+  <form action="/usuarios/criar" method="POST">
+    <input name="nome" placeholder="Nome" required>
+    <input name="senha" placeholder="Senha" required>
+    <input name="email" placeholder="Email" required>
+    <input name="idade" placeholder="Idade" required>
+    <input name="telefone" placeholder="Telefone" required>
+    <input name="cpf" placeholder="CPF" required>
+    <input name="instituicao" placeholder="Instituição" required>
+    <input name="cargo" placeholder="Cargo (número)" required>
+    <button type="submit">Criar</button>
+  </form>
+
+  <h2>Ver Usuário</h2>
+  <form action="/usuarios/detalhe" method="GET">
+    <input name="id" placeholder="id" required>
+    <button type="submit">Ver</button>
+  </form>
+
+  <h2>Emitir Certificado</h2>
+  <form action="/certificados/criar" method="POST">
+    <input name="idEvento" placeholder="ID do Evento" required>
+    <input name="idUsuario" placeholder="ID do Usuário" required>
+    <button type="submit">Emitir Certificado</button>
+  </form>
+
+  <h2>Registrar Presença</h2>
+  <form action="/presenca/registrar" method="POST">
+    <input name="idUsuario" placeholder="ID do Usuário" required>
+    <input name="idEvento" placeholder="ID do Evento" required>
+    <select name="comparecer" required>
+      <option value="true">Compareceu</option>
+      <option value="false">Não Compareceu</option>
+    </select>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <h2>Enviar Feedback</h2>
+  <form action="/feedbacks/criar" method="POST">
+    <input name="id" placeholder="ID do Feedback (numérico)" required>
+    <input name="idEvento" placeholder="ID do Evento" required>
+    <input name="idUsuario" placeholder="ID do Usuário" required>
+    <input name="descricao" placeholder="Descrição do feedback" required>
+    <input name="nota" placeholder="Nota (1 a 5)" required>
+    <button type="submit">Enviar</button>
+  </form>
+
+</body>
+</html>

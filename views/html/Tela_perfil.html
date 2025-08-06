@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACADLY - Meu Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Overlock+SC&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="page-perfil">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="/img/Logo.png" alt="Logo ACADLY">
+        </div>
+        <nav class="nav-menu">
+            <details>
+                <summary class="style_text">ORGANIZADOR DE EVENTOS</summary>
+                <ul>
+                    <li><a href="/Tela Organizador.html" class="active"><i class="icon fa-solid fa-calendar"></i> Meus Eventos</a>
+                    </li>
+                    <li><a href="/Tela Participante_Participar.html"><i class="icon fa-solid fa-ticket"></i> Criar um Evento</a></li>
+                    <li><a href="#"><i class="icon fa-solid fa-paper-plane"></i> Gerenciar Participantes</a></li>
+                    <li><a href="/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i> Gerenciar Submissões</a></li>
+                    <li><a href="/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i>Emitir Certificado</a></li>
+                    
+                </ul>
+            </details>
+            <details open>
+                <summary>PARTICIPANTE DE EVENTOS</summary>
+                <ul>
+                    <li><a href="/html/painelEventos.html" class="active"><i class="icon fa-solid fa-calendar"></i> Meus Eventos</a></li>
+                    <li><a href="/html/Tela Participante_Participar.html"><i class="icon fa-solid fa-ticket arrasta"></i> Participar de um Evento</a></li>
+                    <li><a href="#"><i class="icon fa-solid fa-paper-plane"></i> Realizar Submissões</a></li>
+                    <li><a href="/html/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i> Baixar Certificados</a></li>
+                </ul>
+            </details>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section class="profile-page">
+
+            <section class="profile-details">
+                <header class="profile-header">
+                    <h2>Foto de Perfil</h2>
+                    <div class="photo-and-link-wrapper">
+                        <img class="profile-avatar" src="/img/Perfil.png" alt="Foto de Perfil de Rebeca Mattos">
+                        <a href="/html/perfilFotoSendoAtualizada.html" class="change-photo-link">Alterar foto</a>
+                    </div>
+                </header>
+
+                <hr class="divider">
+
+                <dl>
+                    <dt>Nome do Usuário</dt>
+                    <dd>Rebeca Mattos</dd>
+
+                    <dt>Endereço de Email</dt>
+                    <dd>rebecamattos@gmail.com</dd>
+
+                    <dt>Instituição de Ensino</dt>
+                    <dd>Instituto Federal do Sudeste de Minas</dd>
+
+                    <dt>Sigla da Institução de Ensino</dt>
+                    <dd>IFSEMG</dd>
+
+                    <dt>Senha</dt>
+                    <dd>Rebeca123</dd>
+                </dl>
+
+            </section>
+
+            <footer class="profile-actions">
+                <button class="btn-editar"><a href="/html/perfilSendoEditado.html">Editar</button></a>
+            </footer>
+
+        </section>
+    </main>
+
+</body>
+
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACADLY - Meu Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Overlock+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-perfil">
+
+    <aside class="sidebar">
+        </aside>
+
+    <main class="main-content">
+        <section class="profile-page" id="profile-container">
+            
+            <header class="profile-header">
+                <h2>Foto de Perfil</h2>
+                <div class="photo-and-link-wrapper">
+                    <img class="profile-avatar" src="/img/Perfil.png" alt="Foto de Perfil de Rebeca Mattos">
+                    <a href="#" class="change-photo-link">Alterar foto</a>
+                </div>
+            </header>
+
+            <hr class="divider">
+
+            <div class="profile-details">
+                <dl>
+                    <dt>Nome do Usuário</dt>
+                    <dd class="view-mode">Rebeca Mattos</dd>
+                    <dd class="edit-mode"><input type="text" value="Rebeca Mattos"></dd>
+
+                    <dt>Endereço de Email</dt>
+                    <dd class="view-mode">rebecamattos@gmail.com</dd>
+                    <dd class="edit-mode"><input type="email" value="rebecamattos@gmail.com"></dd>
+
+                    <dt>Instituição de Ensino</dt>
+                    <dd class="view-mode">Instituto Federal do Sudeste de Minas</dd>
+                    <dd class="edit-mode"><input type="text" value="Instituto Federal do Sudeste de Minas"></dd>
+
+                    <dt>Sigla da Institução de Ensino</dt>
+                    <dd class="view-mode">IFSEMG</dd>
+                    <dd class="edit-mode"><input type="text" value="IFSEMG"></dd>
+
+                    <dt>Senha</dt>
+                    <dd class="view-mode">●●●●●●●●</dd>
+                    <dd class="edit-mode">
+                        <div class="password-input-wrapper">
+                            <input type="password" value="Rebeca123">
+                            <i class="fa-regular fa-eye-slash"></i>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            
+            <footer class="profile-actions">
+                <button class="btn-editar view-mode" id="edit-btn">Editar</button>
+                <div class="edit-mode">
+                    <button type="button" class="btn-voltar" id="cancel-btn">Voltar</button>
+                    <button type="submit" class="btn-salvar" id="save-btn">Salvar</button>
+                </div>
+            </footer>
+
+        </section>
+    </main>
+
+    <script>
+        // 1. Pega os elementos importantes da página
+        const profileContainer = document.getElementById('profile-container');
+        const editBtn = document.getElementById('edit-btn');
+        const saveBtn = document.getElementById('save-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+
+        // 2. O que acontece quando clica em "Editar"
+        editBtn.addEventListener('click', () => {
+            // Adiciona a classe 'editing' ao container principal
+            profileContainer.classList.add('editing');
+        });
+
+        // 3. O que acontece quando clica em "Salvar"
+        saveBtn.addEventListener('click', () => {
+            // (Aqui entraria a lógica para salvar os dados no futuro)
+            // Por enquanto, apenas remove a classe 'editing' para voltar ao modo de visualização
+            profileContainer.classList.remove('editing');
+        });
+
+        // 4. O que acontece quando clica em "Voltar"
+        cancelBtn.addEventListener('click', () => {
+            // Remove a classe 'editing' para cancelar e voltar ao modo de visualização
+            profileContainer.classList.remove('editing');
+        });
+    </script>
+
+</body>
+</html>
+-->

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Criar Eventos</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Overlock+SC&display=swap" rel="stylesheet">
+</head>
+<body class="page-criar-eventos diminuir">
+    <aside class="sidebar aumentarPad">
+        <div class="sidebar-header">
+            <img src="/img/Logo.png" class="" alt="Logo" />
+        </div>
+        <nav class="nav-menu subir">
+            <details open>
+                <summary>
+                    <i class="fa-solid fa-calendar-check icon"></i>
+                    <span>Organizador de Eventos</span>
+                </summary>
+                <ul>
+                    <li>
+                        <a href="/html/eventosOrg.html"><i class="fa-solid fa-list-check icon"></i><span>Meus Eventos</span></a>
+                    </li>
+                    <li>
+                        <a href="/html/criarEvento.html" class="active"><i class="fa-solid fa-plus icon"></i><span>Criar um novo Evento</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-users icon"></i><span>Gerenciar participantes</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-file-circle-check icon"></i><span>Gerenciar submissões</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-star icon"></i><span>Avaliações</span></a>
+                    </li>
+                </ul>
+            </details>
+            <details>
+                <summary>
+                    <i class="fa-solid fa-user-group icon"></i>
+                    <span>Participante de Eventos</span>
+                </summary>
+            </details>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="form-header">
+            <div class="header-actions">
+                <i class="fa-solid fa-circle-question"></i>
+                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <div class="avatar-container">
+                <img src="/img/Perfil.png" alt="Ícone de Perfil" />
+            </div>
+        </header>
+
+        <form class="event-form">
+            <section class="form-section">
+                <div class="input-grid">
+                    <div class="input-group full-width">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" value="Organizador: Carol" readonly />
+                    </div>
+                    <div class="input-group full-width">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email: carol@" />
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <input type="text" placeholder="Instituição de Ensino" />
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <input type="text" placeholder="Sigla da Instituição" />
+                    </div>
+                </div>
+            </section>
+            
+            <section class="form-section">
+                <div class="form-image-upload imgEvent">
+                    <img src="/img/Imagem_evento.png" alt="Imagem do Evento" class="event-image-preview"/>
+                    <button type="button" class="upload-button" style="margin-left: 10%; margin-top: -1%;"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+                </div>
+                
+                <div class="input-grid">
+                    <div class="input-group full-width">
+                        <i class="fa-solid fa-tag"></i>
+                        <input type="text" placeholder="Título do Evento" />
+                    </div>
+                    <div class="input-group full-width">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" placeholder="Endereço completo: Avenida" />
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-city"></i>
+                        <input type="text" placeholder="Cidade do Evento" />
+                    </div>
+                    <div class="input-group select-group">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <select>
+                            <option value="">Estado: Minas Gerais</option>
+                            <option value="mg">Minas Gerais</option>
+                            </select>
+                    </div>
+                    <div class="input-group select-group">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="text" placeholder="        Data de Início: 2 de Maio de 2025" onfocus="(this.type='date')" onblur="(this.type='text')" />
+                    </div>
+                    <div class="input-group select-group">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="text" placeholder="        Data de Fim: 2 de Maio de 2025" onfocus="(this.type='date')" onblur="(this.type='text')" />
+                    </div>
+                    <div class="input-group textarea-group full-width">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <textarea placeholder="Descrição e Termos de Submissão de Projetos"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="button" class="btn-voltar">Voltar</button>
+                <button type="submit" class="btn-criar">Criar</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,741 @@
+/* ======================================= */
+/* == GLOBAIS E ESTRUTURA RESPONSIVA == */
+/* ======================================= */
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+:root {
+    --cor-fundo-sidebar: #ffe5b4;
+    --cor-fundo-main: #ffffff;
+    --cor-card-e-ativo: #ffe5b4;
+    --cor-botao-principal: #ffb370;
+    --cor-borda-container: #e88684;
+    --cor-texto-principal: #000000;
+    --cor-texto-secundario: #312f2f;
+    --cor-texto-valor: #656565;
+    --cor-ver-mais: #566369;
+    --cor-texto-botao: #ffffff;
+    --cor-container-form: #ffe5b4;
+    --cor-input-bg: #ffffff;
+    --cor-botao-voltar: #9b9b9b;
+}
+
+* { -webkit-font-smoothing: antialiased; box-sizing: border-box; }
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100vh; /* Garante que o corpo ocupe no mínimo a altura da tela */
+    font-family: 'Overlock SC', sans-serif;
+    background-color: var(--cor-fundo-main);
+    color: var(--cor-texto-principal);
+    display: flex;
+}
+a, button, input, select, textarea { font-family: inherit; color: inherit; text-decoration: none; }
+
+.sidebar {
+    width: 210px; /* Largura um pouco menor para dar mais espaço 
+    background-color: var(--cor-fundo-sidebar);
+    padding-top: 10px;
+    margin-right: 10px;
+    padding-left: 3px;
+    padding-right: 300px;
+    border-radius: 5px;
+    flex-shrink: 0;
+    overflow-y: auto;
+} 
+
+.sidebar {
+    width: 280px; /* Largura um pouco menor para dar mais espaço */
+    background-color: var(--cor-fundo-sidebar);
+    padding: 2.5rem 1.5rem;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.main-content {
+    flex-grow: 1; /* Permite que o conteúdo principal cresça */
+    overflow-y: auto; /* Adiciona rolagem APENAS ao conteúdo principal */
+    padding: 2.5rem;
+}
+
+
+/* ================================== */
+/* == COMPONENTES COMUNS == */
+/* ================================== */
+.sidebar-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 3.5rem; padding-left: 0.5rem; }
+.sidebar-header img { max-width: 100%; }
+.nav-menu summary { font-weight: 400; font-size: 20px; cursor: pointer; padding: 0.75rem 0.5rem; list-style: none; display: flex; align-items: center; gap: 0.75rem; }
+.nav-menu summary::-webkit-details-marker { display: none; }
+.nav-menu summary::before { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 0.8rem; transition: transform 0.2s; padding-right: 10px; }
+.nav-menu details[open] > summary::before { transform: rotate(-180deg); }
+.nav-menu ul { list-style: none; padding-left: 1.5rem; margin-top: 1rem; }
+.nav-menu li a { display: flex; align-items: center; gap: 0.75rem; color: var(--cor-texto-secundario); padding: 0.8rem; border-radius: 8px; font-size: 16px; transition: background-color 0.2s, color 0.2s; }
+.nav-menu li a .icon { width: 24px; text-align: center; }
+.nav-menu li a.active, .nav-menu li a:hover { font-weight: bold; color: var(--cor-texto-principal); }
+.header-actions { display: flex; align-items: center; gap: 1.75rem; font-size: 1.5rem; color: #BDBDBD; }
+
+
+/* ================================== */
+/* == PÁGINAS COM CONTAINER DE BORDA == */
+/* ================================== */
+body.page-meus-eventos .main-content,
+body.page-perfil .main-content,
+body.page-organizador .main-content {
+    border: 1px solid var(--cor-borda-container);
+    border-radius: 22px;
+    margin: 2.5rem;
+    padding: 2.5rem;
+}
+
+/* --- Cabeçalho padrão (usado em Meus Eventos, Organizador, etc.) --- */
+.main-header { 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    gap: 2rem; 
+    margin-bottom: 2rem;
+}
+.user-profile { display: flex; align-items: center; gap: 1rem; }
+.user-profile > img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; }
+.user-name { display: flex; align-items: center; gap: 0.75rem; font-size: 18px; font-weight: 400; }
+.user-name img { width: 20px; height: 20px; }
+.user-institution { font-size: 16px; font-weight: 400; text-align: left; }
+
+/* ================================== */
+/* == PÁGINA: ORGANIZADOR DE EVENTOS (CARROSSEL) == */
+/* ================================== */
+.carousel-section { margin-bottom: 3rem; }
+.carousel-section h2 { font-size: 28px; font-weight: 400; margin-bottom: 1.5rem; }
+
+.event-card-large {
+    background-color: var(--cor-fundo-sidebar);
+    border-radius: 27px;
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+    align-items: center;
+    gap: 1.5rem;
+}
+.event-logo-large {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin: auto; /* Centraliza em telas pequenas quando quebrar linha */
+}
+.event-details-large {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 24px;
+    font-weight: 400;
+    flex-grow: 1; /* Faz esta área crescer e ocupar o espaço */
+}
+.event-title-large { font-weight: bold; }
+.btn-saiba-mais {
+    background-color: var(--cor-botao-principal);
+    color: var(--cor-texto-botao);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0.8rem 2rem;
+    border-radius: 35px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-left: auto; /* Empurra o botão para a direita */
+}
+
+/* Estilos do Carrossel (Splide) */
+.splide__pagination__page { background: #ddd; width: 15px; height: 15px; }
+.splide__pagination__page.is-active { background: var(--cor-botao-principal); }
+.splide__arrow { background: var(--cor-botao-principal); width: 2.5em; height: 2.5em; }
+.splide__arrow svg { fill: white; }
+
+/* ================================== */
+/* == Media Query para Telas Menores == */
+/* ================================== */
+@media (max-width: 1200px) {
+    .event-card-large {
+        flex-direction: column; /* Empilha os itens */
+        text-align: center;
+    }
+    .event-details-large {
+        font-size: 20px;
+    }
+    .btn-saiba-mais {
+        margin-left: 0; /* Centraliza o botão */
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        height: auto;
+    }
+    .main-content,
+    body.page-meus-eventos .main-content,
+    body.page-perfil .main-content,
+    body.page-organizador .main-content {
+        margin: 0;
+        border-radius: 0;
+        border: none;
+    }
+}
+
+/* ... (O restante do CSS para as outras páginas que você já tinha) ... */
+/* ================================== */
+/* == PÁGINA: MEUS EVENTOS == */
+/* ================================== */
+.events-section { margin-bottom: 2rem; padding: 0 2.5rem; }
+.events-section h2 { font-size: 32px; font-weight: 400; margin-bottom: 1.5rem; }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(370px, 1fr)); gap: 1.5rem; }
+.event-card { background-color: var(--cor-card-e-ativo); border-radius: 30px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; position: relative; height: 141px; }
+.event-logo { width: 93px; height: 93px; object-fit: contain; flex-shrink: 0; }
+.event-details { display: flex; flex-direction: column; gap: 0.5rem; }
+.event-title, .event-date { font-size: 20px; font-weight: 400; }
+.edit-button { font-family: 'Fredoka', sans-serif; font-weight: 500; color: var(--cor-texto-botao); font-size: 14px; background-color: var(--cor-botao-principal); border-radius: 35px; border: none; padding: 0.5rem 1.75rem; cursor: pointer; position: absolute; bottom: 0.8rem; right: 1.25rem; }
+.card-menu-icon { position: absolute; top: 1.1rem; right: 1.25rem; color: var(--cor-texto-principal); font-size: 1.1rem; cursor: pointer; }
+.view-more { display: block; text-align: center; margin-top: 1.5rem; margin-bottom: 2.5rem; color: var(--cor-ver-mais); font-size: 16px; font-weight: 400; }
+
+/* ================================== */
+/* == PÁGINA: ORGANIZADOR DE EVENTOS == */
+/* ================================== */
+.carousel-section { margin-bottom: 3rem; padding: 0 2.5rem;}
+.carousel-section h2 { font-size: 32px; font-weight: 400; margin-bottom: 1.5rem; }
+.event-card-large { background-color: var(--cor-fundo-sidebar); border-radius: 27px; padding: 2rem; display: flex; align-items: center; gap: 2rem; }
+.event-logo-large { width: 250px; height: 250px; object-fit: contain; flex-shrink: 0; }
+.event-details-large { display: flex; flex-direction: column; gap: 0.8rem; font-size: 32px; font-weight: 400; }
+.event-title-large { font-weight: bold; }
+.btn-saiba-mais { margin-left: auto; align-self: flex-end; background-color: var(--cor-botao-principal); color: var(--cor-texto-botao); font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 27px; padding: 1rem 2.5rem; border-radius: 35px; border: none; cursor: pointer; text-align: center; }
+.splide__pagination__page { background: #ddd; width: 20px; height: 20px; }
+.splide__pagination__page.is-active { background: var(--cor-botao-principal); }
+
+
+/* ================================== */
+/* == PÁGINA: PARTICIPAR DE EVENTO == */
+/* ================================== */
+
+/* Estilo específico para o main-content da página de Participar do Evento */
+body:not(.page-meus-eventos):not(.page-perfil):not(.page-organizador) .main-content {
+    padding: 2.5rem; /* Garante o padding interno */
+}
+
+.form-header { display: flex; justify-content: flex-end; align-items: flex-start; height: 120px; position: relative; margin-bottom: 2rem; }
+.form-header .avatar-container { position: absolute; left: 50%; transform: translateX(-50%); top: 0; }
+.form-header .avatar-container img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 6px solid var(--cor-container-form); }
+.form-header .header-actions { padding-top: 1rem; }
+.event-form { display: flex; flex-direction: column; gap: 2rem; }
+.form-section { background-color: var(--cor-container-form); border-radius: 30px; padding: 2rem; }
+.form-section:first-of-type { padding-top: 5rem; }
+.input-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.input-group.full-width { grid-column: 1 / -1; }
+.input-group { background-color: var(--cor-input-bg); border: 1px solid var(--cor-borda-container); border-radius: 22px; display: flex; align-items: center; padding: 0 1.25rem; gap: 1rem; height: 55px; }
+.input-group i { color: var(--cor-texto-secundario); font-size: 1.2rem; }
+.input-group input, .input-group select, .input-group textarea { flex-grow: 1; width: 100%; height: 100%; border: none; outline: none; background: transparent; font-size: 20px; color: var(--cor-texto-secundario); }
+.input-group input::placeholder, .input-group textarea::placeholder { color: var(--cor-texto-secundario); }
+.input-group input[readonly] { cursor: default; }
+.input-group.textarea-group { height: 147px; align-items: flex-start; padding-top: 1rem; }
+.select-group { position: relative; }
+.select-group i { position: absolute; left: 1.25rem; z-index: 1; pointer-events: none; }
+.select-group select { padding-left: 2.5rem; appearance: none; -webkit-appearance: none; cursor: pointer;}
+.image-uploader { width: 169px; height: 169px; border-radius: 50%; border: 4px dashed var(--cor-borda-container); display: flex; justify-content: center; align-items: center; margin: -95px auto 2rem auto; background-color: var(--cor-fundo-main); position: relative; }
+.image-uploader > i { font-size: 4rem; color: #ccc; }
+.image-uploader .upload-icon { position: absolute; bottom: 5px; right: 5px; width: 38px; height: 38px; border-radius: 50%; background-color: var(--cor-botao-principal); color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+.form-actions { display: flex; justify-content: space-between; padding: 1rem 0; }
+.form-actions button { width: 151px; height: 42px; border-radius: 35px; border: none; font-family: 'Fredoka', sans-serif; font-weight: 500; color: var(--cor-texto-botao); font-size: 20px; cursor: pointer; }
+.btn-voltar { background-color: var(--cor-botao-voltar); }
+.btn-participar { background-color: var(--cor-botao-principal); }
+
+
+/* ================================== */
+/* == PÁGINA: EDITAR PERFIL == */
+/* ================================== */
+.profile-page { padding: 2.5rem; }
+.profile-header { margin-bottom: 2rem; }
+.profile-header h2 { font-size: 26px; font-weight: 400; margin-bottom: 1rem; }
+.photo-and-link-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.profile-avatar { width: 139px; height: 139px; border-radius: 50%; object-fit: cover; }
+.change-photo-link { font-size: 20px; color: var(--cor-texto-valor); cursor: pointer; text-decoration: underline; }
+.divider { border: none; height: 2px; background-color: #E0E0E0; margin-bottom: 3rem; }
+.profile-details dt { font-size: 26px; font-weight: 400; color: var(--cor-texto-principal); margin-bottom: 0.5rem; }
+.profile-details dd { font-size: 20px; color: var(--cor-texto-valor); margin-bottom: 2rem; }
+.profile-actions { display: flex; justify-content: flex-end; margin-top: 2rem; }
+.btn-editar { width: 151px; height: 42px; border-radius: 35px; border: none; font-family: 'Fredoka', sans-serif; font-weight: 500; color: var(--cor-texto-botao); font-size: 20px; cursor: pointer; background-color: var(--cor-botao-principal); }
+
+/* ================================== */
+/* == PÁGINA: PRINCIPAL (SEM SIDEBAR) == */
+/* ================================== */
+
+/* Define o fundo e um layout vertical simples para esta página */
+body.page-principal{
+    display: block; /* Sobrescreve o display:flex das outras páginas */
+    background-color: #F8F5EC;
+    font-family: 'Overlock SC', sans-serif; /* Garante a fonte correta */
+}
+
+/* --- Barra de Navegação Superior --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-fundo-sidebar);
+    padding: 1rem 4rem;
+}
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.navbar-logo {
+    height: 60px;
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    width: 300px;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1;
+}
+.user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* --- Imagem Principal (Hero) --- */
+.main-image-container {
+    background-color: var(--cor-fundo-sidebar);
+    padding: 2rem 4rem 0 4rem;
+}
+#imgPrincipal {
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- Estrutura Geral das Seções --- */
+.content-wrapper {
+    max-width: 1400px; /* Limita a largura do conteúdo para alinhar com a imagem */
+    margin: 0 auto; /* Centraliza */
+    padding: 2rem 0;
+}
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: var(--cor-texto-principal);
+}
+
+/* --- Carrossel e Cards --- */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+.carousel-nav {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.nav-icon {
+    width: 24px;
+    height: 24px;
+}
+.cards-grid {
+    display: flex; /* Seu JS controla a visibilidade, o CSS controla o layout interno */
+    gap: 1.5rem;
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Estilo Base dos Cards */
+.interest-card,
+.modality-card,
+.institution-card,
+.region-card {
+    background-color: var(--cor-fundo-sidebar);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    flex: 1; /* Faz com que os 3 cards ocupem o espaço igualmente */
+    text-align: left; /* Garante que o texto comece à esquerda */
+}
+.interest-card-title,
+.modality-card-title,
+.institution-card-title,
+.region-card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.interest-card-icon,
+.modality-card-icon,
+.institution-card-icon,
+.region-card-map {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    align-self: flex-end; /* Joga o ícone para a direita */
+    margin-top: 1rem;
+}
+
+/* --- Rodapé --- */
+.main-footer {
+    background-color: var(--cor-fundo-sidebar);
+    padding: 3rem 4rem;
+    margin-top: 4rem;
+}
+
+.main-footer .container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-footer .row {
+    display: flex;
+    gap: 4rem; /* Define o espaço entre as colunas */
+    flex-wrap: wrap; 
+}
+
+.footer-column {
+    flex: 1; /* Permite que as colunas cresçam, mas sem forçar o espaçamento */
+    min-width: 220px; /* Largura mínima para cada coluna */
+}
+
+.footer-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li, 
+.footer-description, 
+.contact-item {
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto-secundario);
+    font-size: 16px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.diminuir {
+    transform: scale(0.72);
+    transform-origin: top left; /* ou top center, dependendo do alinhamento desejado */
+    width: 133.33vw; /* ajusta para compensar o scale e evitar barras de rolagem horizontais */
+    overflow-x: hidden; /* opcional para evitar scroll horizontal */
+    white-space: nowrap;
+}
+
+.aumentarPad{
+    display: flex;
+    background-color: var(--cor-fundo-sidebar);
+    padding-left: 3px !important;
+    padding-right: 300px !important;
+    border-radius: 5px !important;
+    flex-shrink: 0 !important;
+    overflow-y: auto !important;
+}
+
+.input-pad{
+    margin-bottom: 1em;
+}
+
+.imgEvent{
+    display: grid;
+    place-items: center;
+}
+/* ================================== */
+/* == PÁGINA: CADASTRO == */
+/* ================================== */
+
+/* Define o layout de duas colunas para a página de cadastro */
+body.page-full-layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Impede que a página inteira role */
+}
+
+/* Painel da Esquerda (Imagem Decorativa) */
+.registration-promo {
+    width: 50%;
+    flex-shrink: 0;
+    background-color: var(--cor-fundo-sidebar);
+    display: flex;
+    justify-content: right;
+    align-items: center;
+   
+    position: relative;
+    overflow: hidden;
+}
+.registration-promo img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Painel da Direita (Formulário) */
+.registration-main {
+    width: 50%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 550px;
+    background-color: var(--cor-fundo-main);
+    border: 1px solid var(--cor-borda-container);
+    border-radius: 22px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.form-header-cadastro {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+.form-logo {
+    max-width: 180px;
+}
+
+/* Estilo de input com linha embaixo */
+.input-group-underline {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+.input-group-underline i {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1.2rem;
+}
+.input-group-underline input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+    font-size: 20px;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+.input-group-underline input:focus {
+    border-bottom-color: var(--cor-botao-principal);
+}
+.input-group-underline input::placeholder {
+    color: var(--cor-texto-secundario);
+}
+
+.btn-principal.btn-cadastro {
+    width: 100%;
+    padding: 1rem;
+    font-size: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    color: var(--cor-texto-botao);
+    background-color: var(--cor-botao-principal);
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Ajustes de responsividade para a Página de Cadastro */
+@media (max-width: 992px) {
+    .registration-promo {
+        display: none;
+        
+    }
+    .registration-main {
+        width: 100%;
+    }
+}
+/* ================================== */
+/* == PÁGINA: LOGIN == */
+/* ================================== */
+
+/* Container para "Esqueceu a senha?" e botão "Login" */
+.form-actions-login {
+    display: flex;
+    justify-content: space-between; /* Coloca um item na esquerda e outro na direita */
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.forgot-password {
+    font-size: 16px;
+    color: var(--cor-texto-valor);
+    text-decoration: underline;
+}
+
+/* Estilo do botão de login (reaproveitando o estilo principal) */
+.form-actions-login .btn-principal {
+    padding: 0.6rem 2rem;
+    font-size: 18px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    color: #fff;
+    background-color: var(--cor-botao-principal);
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+}
+
+/* Linha divisória */
+.divider-login {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 2rem 0;
+}
+
+/* Texto para login com Google */
+.social-login {
+    text-align: center;
+}
+.social-login a {
+    font-size: 16px;
+    color: var(--cor-texto-valor);
+    text-decoration: underline;
+}
+/* ================================== */
+/* == PÁGINA: CATEGORIA == */
+/* ================================== */
+
+/* Define um layout vertical e fundo para a página de Categoria */
+body.page-categoria {
+    display: block; 
+    background-color: #F8F5EC;
+}
+
+/* Reutiliza o estilo do header da página principal */
+body.page-categoria .navbar-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-fundo-sidebar);
+    padding: 1rem 4rem;
+}
+
+/* Seção Hero (Título e Imagem grande) */
+.category-hero-section {
+    background-color: var(--cor-fundo-sidebar);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0 0 40px 40px; /* Bordas arredondadas apenas na parte inferior */
+}
+.category-hero-section h1 {
+    font-size: 52px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.category-hero-section img {
+    max-width: 40%;
+    height: auto;
+}
+
+/* Seção da lista de eventos */
+.event-list-section {
+    margin-top: 3rem;
+}
+.list-section-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--cor-texto-secundario);
+}
+.event-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+.event-list-card {
+    background-color: var(--cor-fundo-sidebar);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.event-list-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.card-location, .card-date {
+    font-size: 16px;
+    color: var(--cor-texto-secundario);
+}
+
+/* Responsividade específica para a página de Categoria */
+@media (max-width: 768px) {
+    body.page-categoria .navbar-principal {
+        padding: 1rem 2rem;
+    }
+    .category-hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+    .category-hero-section h1 {
+        font-size: 40px;
+    }
+    .category-hero-section img {
+        max-width: 80%;
+    }
+}

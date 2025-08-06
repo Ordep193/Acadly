@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACADLY - Painel de Eventos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Overlock+SC&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="page-organizador">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="/img/Logo.png" alt="Foto de Perfil de Rebeca Mattos">
+
+        </div>
+
+        <nav class="nav-menu">
+            <details>
+                <summary>ORGANIZADOR DE EVENTOS</summary>
+                <ul>
+                    <li><a href="/index.html" class="active"><i class="icon fa-solid fa-calendar"></i> Meus Eventos</a>
+                    </li>
+                    <li><a href="/Tela Participante_Participar.html"><i class="icon fa-solid fa-ticket"></i> Criar um Evento</a></li>
+                    <li><a href="#"><i class="icon fa-solid fa-paper-plane"></i> Gerenciar Participantes</a></li>
+                    <li><a href="/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i> Gerenciar Submissões</a></li>
+                    <li><a href="/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i>Emitir Certificado</a></li>
+                </ul>
+
+            </details>
+
+            <details open>
+                <summary>PARTICIPANTE DE EVENTOS</summary>
+                <ul>
+                    <li><a href="/html/painelEventos.html" class="active"><i class="icon fa-solid fa-calendar"></i> Meus Eventos</a></li>
+                    <li><a href="/html/Tela Participante_Participar.html"><i class="icon fa-solid fa-ticket arrasta"></i> Participar de um Evento</a></li>
+                    <li><a href="#"><i class="icon fa-solid fa-paper-plane"></i> Realizar Submissões</a></li>
+                    <li><a href="/html/TelaParticipante_BaixarCertificado.html"><i class="icon fa-solid fa-file-arrow-down"></i> Baixar Certificados</a></li>
+                </ul>
+            </details>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="main-header">
+            <div class="user-profile">
+                <img src="/img/Perfil.png" alt="Foto de Perfil de Rebeca Mattos">
+                <div class="user-text">
+                    <div class="user-name">Rebeca Mattos <a href="/html/perfil.html"> <img src="/img/editar.png" alt="Editar Perfil"> </a></div>
+                    <div class="user-institution">IFSEMG</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <i class="fa-regular fa-circle-question"></i>
+                <i class="fa-regular fa-bell"></i>
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </header>
+
+        <section class="carousel-section">
+            <h2>Eventos em Destaque</h2>
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="event-card-large">
+                                <img src="https://i.imgur.com/7bQeJ73.png" alt="Logo 30º CIAED"
+                                    class="event-logo-large">
+                                <div class="event-details-large">
+                                    <span class="event-title-large">30º CIAED</span>
+                                    <span class="event-location">Barcelona, Argentina</span>
+                                    <span class="event-date">23 de Maio de 2025</span>
+                                </div>
+                                <a href="#" class="btn-saiba-mais">Saiba mais</a>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="event-card-large">
+                                <img src="https://i.imgur.com/K5f49E0.png" alt="Logo Bett Brasil"
+                                    class="event-logo-large">
+                                <div class="event-details-large">
+                                    <span class="event-title-large">Bett Brasil</span>
+                                    <span class="event-location">São Paulo, SP (Brasil)</span>
+                                    <span class="event-date">28 de Maio de 2025</span>
+                                </div>
+                                <a href="#" class="btn-saiba-mais">Saiba mais</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2>Meus Eventos</h2>
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="event-card-large">
+                                <img src="https://i.imgur.com/K5f49E0.png" alt="Logo Bett Brasil"
+                                    class="event-logo-large">
+                                <div class="event-details-large">
+                                    <span class="event-title-large">Bett Brasil</span>
+                                    <span class="event-location">São Paulo, SP (Brasil)</span>
+                                    <span class="event-date">28 de Maio de 2025</span>
+                                </div>
+                                <a href="#" class="btn-saiba-mais">Saiba mais</a>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="event-card-large">
+                                <img src="/img/ciaed.png" alt="Logo 30º CIAED"
+                                    class="event-logo-large">
+                                <div class="event-details-large">
+                                    <span class="event-title-large">30º CIAED</span>
+                                    <span class="event-location">Barcelona, Argentina</span>
+                                    <span class="event-date">23 de Maio de 2025</span>
+                                </div>
+                                <a href="#" class="btn-saiba-mais">Saiba mais</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Encontra TODOS os carrosséis na página que têm a classe '.splide'
+            var carousels = document.querySelectorAll('.splide');
+
+            // Para cada carrossel encontrado, inicializa o Splide nele
+            for (var i = 0; i < carousels.length; i++) {
+                new Splide(carousels[i], {
+                    // Opções (opcional)
+                    perPage: 1,      // Mostrar 1 slide por vez
+                    gap: '1rem', // Espaço entre os slides (se mostrar mais de 1)
+                }).mount();
+            }
+        });
+    </script>
+</body>
+
+</html>
